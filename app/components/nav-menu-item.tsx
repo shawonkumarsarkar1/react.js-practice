@@ -64,12 +64,18 @@ const NavMenuItem = ({
   // Simple menu item without sub-items
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={item.isActive}>
-        <Link to={item.url} aria-current={item.isActive ? "page" : undefined}>
-          {item.icon && <item.icon />}
-          <span>{item.title}</span>
-        </Link>
-      </SidebarMenuButton>
+      <Link to={item.url} aria-current={item.isActive ? "page" : undefined}>
+        <SidebarMenuButton
+          asChild
+          isActive={item.isActive}
+          className="hover:bg-black/10 hover:text-red-500 active:bg-black/10 active:text-red-500"
+        >
+          <div>
+            {item.icon && <item.icon />}
+            <span>{item.title}</span>
+          </div>
+        </SidebarMenuButton>
+      </Link>
     </SidebarMenuItem>
   );
 };
