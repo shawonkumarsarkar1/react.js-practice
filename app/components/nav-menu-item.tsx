@@ -5,9 +5,6 @@ import {
   CollapsibleTrigger,
 } from "~/components/ui/collapsible";
 import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -15,7 +12,7 @@ import {
   SidebarMenuSubItem,
 } from "~/components/ui/sidebar";
 
-export function NavMenuItem({
+const NavMenuItem = ({
   item,
 }: {
   item: {
@@ -28,7 +25,7 @@ export function NavMenuItem({
       url: string;
     }[];
   };
-}) {
+}) => {
   // If item has sub-items, render as collapsible
   if (item.items && item.items.length > 0) {
     return (
@@ -74,30 +71,6 @@ export function NavMenuItem({
       </SidebarMenuButton>
     </SidebarMenuItem>
   );
-}
+};
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
-  return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
-      <SidebarMenu>
-        {items.map(item => (
-          <NavMenuItem key={item.title} item={item} />
-        ))}
-      </SidebarMenu>
-    </SidebarGroup>
-  );
-}
+export default NavMenuItem;

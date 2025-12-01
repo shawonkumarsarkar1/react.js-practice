@@ -42,9 +42,9 @@ const MainLayout = () => {
             </Breadcrumb>
           </div>
         </header>
-        <div className="border-t-2">
+        <main className="border-t-2">
           <Outlet />
-        </div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );
