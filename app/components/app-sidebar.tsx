@@ -9,14 +9,16 @@ import {
   SquareTerminal,
 } from "lucide-react";
 
-import { NavMain } from "~/components/nav-main";
+import { NavMenuItem } from "~/components/nav-main";
 import { NavUser } from "~/components/nav-user";
-import { TeamSwitcher } from "~/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
   SidebarHeader,
+  SidebarMenu,
   SidebarMenuButton,
   SidebarRail,
 } from "~/components/ui/sidebar";
@@ -28,23 +30,6 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
       title: "Playground",
@@ -109,6 +94,11 @@ const data = {
       ],
     },
     {
+      title: "Documentation2",
+      url: "#",
+      icon: BookOpen,
+    },
+    {
       title: "Settings",
       url: "#",
       icon: Settings2,
@@ -152,7 +142,15 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         </SidebarMenuButton>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <SidebarGroup>
+          <SidebarGroupLabel>Platform</SidebarGroupLabel>
+          <SidebarMenu>
+            {data.navMain.map(item => (
+              <NavMenuItem key={item.title} item={item} />
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+        {/* <NavMain items={data.navMain} /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
