@@ -1,22 +1,23 @@
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { House, KeyRound } from "lucide-react";
 
 const navItems = [
   {
-    title: "Playground",
+    title: "Home",
+    url: "/",
+    icon: House,
+  },
+  {
+    title: "Auth",
     url: "#",
-    icon: SquareTerminal,
-    isActive: true,
+    icon: KeyRound,
+    isActive: false,
     items: [
       {
-        title: "History",
+        title: "Log in",
         url: "#",
       },
       {
-        title: "Starred",
-        url: "#",
-      },
-      {
-        title: "Settings",
+        title: "Register",
         url: "#",
       },
     ],

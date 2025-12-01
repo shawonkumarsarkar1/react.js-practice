@@ -1,5 +1,4 @@
 import * as React from "react";
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
 
 import { NavUser } from "~/components/nav-user";
 import {
@@ -21,7 +20,7 @@ const data = {
   user: {
     name: "Shawon Kumar Sarkar",
     email: "shawonkumarsarkar10@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/android-chrome-512x512.png",
   },
 };
 
