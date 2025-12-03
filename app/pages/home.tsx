@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
-import logoDark from "/logo-dark.svg";
-import logoLight from "/logo-light.svg";
+import logoDark from "/react-router-logo-dark.svg";
+import logoLight from "/react-router-logo-light.svg";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [

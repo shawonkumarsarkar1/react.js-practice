@@ -1,4 +1,4 @@
-import { House, KeyRound } from "lucide-react";
+import { House, LogIn } from "lucide-react";
 
 const navItems = [
   {
@@ -9,16 +9,16 @@ const navItems = [
   {
     title: "Auth",
     url: "#",
-    icon: KeyRound,
+    icon: LogIn,
     isActive: false,
     items: [
       {
         title: "Log in",
-        url: "#",
+        url: "auth/log-in",
       },
       {
         title: "Register",
-        url: "#",
+        url: "auth/register",
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
+import { SquareUserRound, BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
@@ -40,10 +40,7 @@ export function NavUser({
               <Avatar className="h-8 w-8 rounded-xs">
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className="rounded-xs">
-                  <img
-                    src="../../public/android-chrome-512x512.png"
-                    alt="error"
-                  />
+                  <SquareUserRound />
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -64,10 +61,7 @@ export function NavUser({
                 <Avatar className="h-8 w-8 rounded-xs">
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className="rounded-xs">
-                    <img
-                      src="../../public/android-chrome-512x512.png"
-                      alt="error"
-                    />
+                    <SquareUserRound />
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">

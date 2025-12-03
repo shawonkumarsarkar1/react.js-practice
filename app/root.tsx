@@ -9,7 +9,6 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import MainLayout from "./main-layout/mainLayout";
-import ThemeProvider from "./provider/theme-provider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,9 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          {children}
-        </ThemeProvider>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
