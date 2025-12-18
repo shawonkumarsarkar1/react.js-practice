@@ -1,56 +1,88 @@
 import React from "react";
 import {
   SidebarGroup,
-  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "./ui/sidebar";
-import { BadgeDollarSign } from "lucide-react";
-import { Button } from "./ui/button";
+import { ChevronRight, type LucideIcon } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
+import { NavLink } from "react-router";
 
 const NavMain = ({
   items,
 }: {
   items: {
     title: string;
-    url: string;
-    icon?: React.ComponentType<any>;
+    url?: string;
+    isActive?: boolean;
+    items?: {
+      title: string;
+      url: string;
+    }[];
   }[];
 }) => {
   return (
     <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map(item => {
+          const hasSubItems = item.items && item.items.length > 0;
+
+          if (!hasSubItems) {
+            return (
+              <SidebarMenuItem key={item.title}>
+                <NavLink
+                  to={item.url || "#"}
+                  className="block px-2 py-1 hover:bg-black/10 dark:hover:bg-white/10"
+                >
+                  <span>{item.title}</span>
+                </NavLink>
+              </SidebarMenuItem>
+            );
+          }
+
+          return (
+            <Collapsible
+              key={item.title}
+              asChild
+              defaultOpen={item.isActive}
+              className="group/collapsible"
             >
-              <BadgeDollarSign />
-              <span>Quick Create</span>
-            </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <BadgeDollarSign />
-              <span className="sr-only">Inbox</span>
-            </Button>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <SidebarMenu>
-          {items.map(item => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <div className="flex items-center px-2 py-1 cursor-default hover:bg-black/10 dark:hover:bg-white/10">
+                    <span>{item.title}</span>
+                    <ChevronRight className="size-4! ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.items?.map(subItem => (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <NavLink
+                          to={subItem.url}
+                          className="block px-2 py-1 hover:bg-black/10 dark:hover:bg-white/10"
+                        >
+                          <span className="text-sm">{subItem.title}</span>
+                        </NavLink>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          );
+        })}
+      </SidebarMenu>
     </SidebarGroup>
   );
 };

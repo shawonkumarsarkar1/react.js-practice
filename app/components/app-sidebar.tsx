@@ -5,29 +5,24 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-import { BadgeDollarSign } from "lucide-react";
+import { SiReact } from "react-icons/si";
 import NavMain from "./nav-main";
 import data from "~/data";
 import NavUser from "./nav-user";
+import { Link } from "react-router";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="offcanvas" {...props} className="select-none">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-            >
-              <a href="#">
-                <BadgeDollarSign className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
+            <Link to="/" className="flex items-center gap-2">
+              <SiReact className="size-7! text-blue-400" />
+              <span className="text-xl font-semibold">React.js Practice</span>
+            </Link>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
