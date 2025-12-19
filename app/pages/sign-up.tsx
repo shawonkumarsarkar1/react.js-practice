@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/button";
 import {
@@ -10,11 +11,24 @@ import {
 } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 
+type Inputs = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
+
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
   return (
     <div className="h-full flex items-center justify-center">
       <div className="w-full max-w-lg">
-        <form className="p-6 md:p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
           <FieldGroup>
             <div className="flex flex-col items-center gap-2 text-center">
               <h1 className="text-2xl font-bold">Create your account</h1>
@@ -23,11 +37,25 @@ const SignUp = () => {
               <Field className="grid grid-cols-2 gap-4">
                 <Field>
                   <FieldLabel htmlFor="firstName">First Name</FieldLabel>
-                  <Input id="firstName" type="text" required />
+                  <Input
+                    id="firstName"
+                    type="text"
+                    {...register("firstName", { required: true })}
+                  />
+                  <FieldDescription className="text-red-400">
+                    {errors.firstName && "First name is required"}
+                  </FieldDescription>
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="lastName">Last Name</FieldLabel>
-                  <Input id="lastName" type="text" required />
+                  <Input
+                    id="lastName"
+                    type="text"
+                    {...register("lastName", { required: true })}
+                  />
+                  <FieldDescription className="text-red-400">
+                    {errors.lastName && "Last name is required"}
+                  </FieldDescription>
                 </Field>
               </Field>
             </Field>
@@ -37,14 +65,23 @@ const SignUp = () => {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
-                required
+                {...register("email", { required: true })}
               />
+              <FieldDescription className="text-red-400">
+                {errors.email && "Email is required"}
+              </FieldDescription>
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" type="password" required />
-              <FieldDescription>
-                Must be at least 8 characters long.
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+              <FieldDescription className="text-red-400">
+                {errors.password
+                  ? "Password is required"
+                  : "Must be at least 8 characters long."}
               </FieldDescription>
             </Field>
             <Field>

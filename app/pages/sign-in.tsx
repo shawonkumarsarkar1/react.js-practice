@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/button";
 import {
@@ -10,11 +11,22 @@ import {
 } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
   return (
     <div className="h-full flex items-center justify-center">
       <div className="w-full max-w-lg">
-        <form className="p-6 md:p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
           <FieldGroup>
             <div className="flex flex-col items-center gap-2 text-center">
               <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -25,20 +37,30 @@ const SignIn = () => {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
-                required
+                {...register("email", { required: true })}
               />
+              <FieldDescription className="text-red-400">
+                {errors.email && "Email is required"}
+              </FieldDescription>
             </Field>
             <Field>
               <div className="flex items-center">
                 <FieldLabel htmlFor="password">Password</FieldLabel>
                 <Link
                   to="#"
-                  className="ml-auto text-sm text-blue-600 underline-offset-2 hover:underline"
+                  className="ml-auto text-sm text-blue-400 underline-offset-2 hover:underline"
                 >
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+              <FieldDescription className="text-red-400">
+                {errors.password && "Password is required"}
+              </FieldDescription>
             </Field>
             <Field>
               <Button type="submit">Sign In</Button>
