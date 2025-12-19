@@ -13,7 +13,7 @@ import { Input } from "~/components/ui/input";
 const SignIn = () => {
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
         <form className="p-6 md:p-8">
           <FieldGroup>
             <div className="flex flex-col items-center gap-2 text-center">
@@ -31,17 +31,17 @@ const SignIn = () => {
             <Field>
               <div className="flex items-center">
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                <a
-                  href="#"
-                  className="ml-auto text-sm underline-offset-2 hover:underline"
+                <Link
+                  to="#"
+                  className="ml-auto text-sm text-blue-600 underline-offset-2 hover:underline"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
               <Input id="password" type="password" required />
             </Field>
             <Field>
-              <Button type="submit">Login</Button>
+              <Button type="submit">Sign In</Button>
             </Field>
             <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
               Or continue with
@@ -95,7 +95,8 @@ const SignIn = () => {
               </Button>
             </Field>
             <FieldDescription className="text-center">
-              Don&apos;t have an account? <Link to="/auth/sign-up">Sign up</Link>
+              Don&apos;t have an account?{" "}
+              <Link to="/auth/sign-up">Sign up</Link>
             </FieldDescription>
           </FieldGroup>
         </form>
